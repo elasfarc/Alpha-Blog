@@ -1,0 +1,15 @@
+current directory: /Users/testing/Downloads/1-temp/1-back-again/alpha-blog/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+/Users/testing/.rvm/rubies/ruby-2.7.2/bin/ruby -I /Users/testing/.rvm/rubies/ruby-2.7.2/lib/ruby/2.7.0 -r ./siteconf20210104-2319-spj4yi.rb extconf.rb
+creating Makefile
+
+current directory: /Users/testing/Downloads/1-temp/1-back-again/alpha-blog/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/testing/Downloads/1-temp/1-back-again/alpha-blog/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/testing/Downloads/1-temp/1-back-again/alpha-blog/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20210104-2319-1ai76s6/bootsnap
