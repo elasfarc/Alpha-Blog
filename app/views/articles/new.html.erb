@@ -1,0 +1,13 @@
+<h1>Create a new article</h1>
+
+<form action="/articles" method='post' accept-charset="UTF-8">
+
+    <input type="hidden" name='authenticity_token' value='<%=form_authenticity_token%>'>
+    <label for="title">Title:</label>
+    <input type="text" name='article[title]' id='title'>
+    <br>
+    <label for="description">Description:</label>
+    <input type="textarea" name="article[description]" id="description">
+
+    <input type="submit" name="Create" id="">
+</form>
