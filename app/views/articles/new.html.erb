@@ -1,5 +1,5 @@
 <h1>Create a new article</h1>
-
+<!--
 <form action="/articles" method='post' accept-charset="UTF-8">
 
     <input type="hidden" name='authenticity_token' value='<%=form_authenticity_token%>'>
@@ -11,3 +11,20 @@
 
     <input type="submit" name="Create" id="">
 </form>
+
+-->
+
+<%=form_tag('/articles', method: :post) do%>
+
+    <%=label_tag('Title:')%>
+    <%=text_field_tag 'title'%>
+    <br>
+
+    <%=label_tag('Description')%>
+    <%=text_area_tag('description')%>
+    <br>
+
+    <%=submit_tag()%>
+
+
+<%end%>
