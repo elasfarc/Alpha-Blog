@@ -32,6 +32,7 @@ class ArticlesController < ApplicationController
         @article = Article.find(params[:id])
         @article.update(article_params)
         if @article.save 
+            flash[:notice] = 'Article was updated'
             redirect_to article_path(@article.id)
         else
             render :edit

@@ -1,3 +1,5 @@
+<h1>Update article</h1>
+<!--
 <%=form_for(@article)do |f|%>
     <%=label(:article, :title, 'Title: ')%>
     <%=f.text_field(:title, placeholder:'your title is here')%>
@@ -7,5 +9,28 @@
     <%=f.text_area(:description, placeholder:'Enter your post here ')%>
     <br>
     
+    <%=f.submit%>
+<%end%>
+
+-->
+<%if @article.errors.any?%>
+    <ul>
+        
+        <%@article.errors.full_messages.each do |msg|%>
+             <li><%=msg%></li>
+        <%end%>
+        
+    </ul>
+<%end%>
+
+<%=form_with(model: @article, local: true) do |f|%>
+    <%=f.label(:title)%><br>
+    <%=f.text_field(:title)%>
+    <br>
+
+    <%=f.label(:description)%><br>
+    <%=f.text_field(:description)%>
+    <br>
+
     <%=f.submit%>
 <%end%>
