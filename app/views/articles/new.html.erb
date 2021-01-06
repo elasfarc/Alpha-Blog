@@ -1,4 +1,14 @@
 <h1>Create a new article</h1>
+
+<%if @article.errors.any?%>
+    <ul>
+        
+         <%@article.errors.full_messages.each do |msg|%>
+             <li><%=msg%></li>
+        <%end%>
+        
+    </ul>    
+<%end%>
 <!--
 <form action="/articles" method='post' accept-charset="UTF-8">
 
@@ -34,7 +44,7 @@
 
 
 
-
+<!--
 <%=form_for(@article)do |f|%>
     <%=label(:article, :title, 'Title: ')%>
     <%=f.text_field(:title, placeholder:'your title is here')%>
@@ -43,6 +53,21 @@
     <%=label(:article, :description, 'Description: ')%>
     <%=f.text_area(:description, placeholder:'Enter your post here ')%>
     <br>
-    
+
     <%=f.submit%>
+<%end%>
+
+
+-->
+
+<%=form_with(scope: :article, url: articles_path, local: true, ) do |f|%>
+    <%=f.label(:title)%><br>
+    <%=f.text_field(:title, placeholder: 'ur title here ')%>
+    <br>
+
+    <%=f.label(:description)%><br>
+    <%=f.text_field(:description)%>
+    <br>
+
+    <%=f.submit('submit')%>
 <%end%>
