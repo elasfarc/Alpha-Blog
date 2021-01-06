@@ -2,3 +2,7 @@
 
 <p><strong>Title: <%=@article.title%></strong></p>
 <p><strong>Description: <%=@article.description%></strong></p>
+
+<%=link_to 'Back to articles page', articles_path%> |
+<%=link_to 'edit', edit_article_path(@article) %> |
+<%=link_to 'DELETE', article_path(@article), method: :delete , data: {confirm: 'Are you sure?!'}%> 
