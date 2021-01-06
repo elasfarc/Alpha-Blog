@@ -1,0 +1,11 @@
+<%=form_for(@article)do |f|%>
+    <%=label(:article, :title, 'Title: ')%>
+    <%=f.text_field(:title, placeholder:'your title is here')%>
+    <br>
+
+    <%=label(:article, :description, 'Description: ')%>
+    <%=f.text_area(:description, placeholder:'Enter your post here ')%>
+    <br>
+    
+    <%=f.submit%>
+<%end%>
