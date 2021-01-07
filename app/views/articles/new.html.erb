@@ -1,14 +1,6 @@
 <h1>Create a new article</h1>
 
-<%if @article.errors.any?%>
-    <ul>
-        
-         <%@article.errors.full_messages.each do |msg|%>
-             <li><%=msg%></li>
-        <%end%>
-        
-    </ul>    
-<%end%>
+
 <!--
 <form action="/articles" method='post' accept-charset="UTF-8">
 
@@ -59,7 +51,7 @@
 
 
 -->
-
+<!--
 <%=form_with(scope: :article, url: articles_path, local: true, ) do |f|%>
     <%=f.label(:title)%><br>
     <%=f.text_field(:title, placeholder: 'ur title here ')%>
@@ -71,3 +63,7 @@
 
     <%=f.submit('submit')%>
 <%end%>
+
+-->
+
+<%= render 'form'%>
