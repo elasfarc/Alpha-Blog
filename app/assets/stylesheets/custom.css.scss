@@ -1,1 +1,10 @@
-@import 'bootstrap/dist/css/bootstrap'
+@import 'bootstrap/dist/css/bootstrap';
+
+
+.jumbotron {
+    background-image: asset-url('writing-home.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
