@@ -1,8 +1,21 @@
-<h1>showing articles</h1>
-
-<p><strong>Title: <%=@article.title%></strong></p>
-<p><strong>Description: <%=@article.description%></strong></p>
-
-<%=link_to 'Back to articles page', articles_path%> |
-<%=link_to 'edit', edit_article_path(@article) %> |
-<%=link_to 'DELETE', article_path(@article), method: :delete , data: {confirm: 'Are you sure?!'}%> 
+<div class="container">
+  <h1 class='text-center mt-3'><%= @article.title %></h1>
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <div class="card text-center mb-5 mt-5">
+        <div class="card-header">
+          By: <%=@article.user.name%>
+        </div>
+        <div class="card-body">
+          
+          <div class="card-text text-left"><%=simple_format(@article.description)%></div>
+          <%=link_to'Edit', edit_article_path(@article), class:"btn btn-outline-primary"%>
+          <%=link_to'Delete', article_path(@article), method: :delete, data: {confirm: 'Are you sure?!'}, class:"btn btn-outline-danger"%>
+        </div>
+        <div class="card-footer text-muted">
+          <small>created <%= time_ago_in_words(@article.created_at)%> ago, edited <%=time_ago_in_words(@article.updated_at)%> ago</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,9 +12,7 @@
 
   <body>
     <%= render 'layouts/navbar'%>
-    <%flash.each do |k,v|%>
-      <%= v %>
-    <%end%>
+    <%= render 'layouts/messages'%>
     <%= yield %>
   </body>
 </html>
