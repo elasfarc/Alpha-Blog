@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+
   def gravatar(user, options = { size: 80 })
     # get the email from URL-parameters or what have you and make lowercase
     email_address = user.email.downcase
@@ -11,5 +12,12 @@ module ApplicationHelper
     # compile URL which can be used in <img src="RIGHT_HERE"...
     image_src = "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}"
     image_tag(image_src, class: 'rounded shadow d-block mx-auto')
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id] 
+  end
+  def logged_in?
+    !!current_user
   end
 end
