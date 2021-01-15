@@ -1,5 +1,7 @@
 <h1 class="text-center mb-4 mt-4">All BLOGGERS</h1>
-
+<div class="digg_pagination row justify-content-center mt-3">
+    <%= will_paginate @users, :container => false %>
+</div>
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-8">
@@ -21,4 +23,7 @@
             <%end%>
         </div>
     </div> 
+</div>
+<div class="digg_pagination row justify-content-center mb-3">
+    <%= will_paginate @users, :container => false %>
 </div>

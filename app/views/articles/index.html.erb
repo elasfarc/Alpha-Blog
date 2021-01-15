@@ -1,3 +1,9 @@
 <h1 class='text-center mt-3'>Showing all Articles</h1>
+<div class="digg_pagination row justify-content-center mt-3">
+    <%= will_paginate @articles, :container => false %>
+</div>
 <%=render 'article'%>
+<div class="digg_pagination row justify-content-center mb-2">
+    <%= will_paginate @articles, :container => false %>
+</div>
 
