@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :edit]
-  before_action :require_user, only: [:edit, :update]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :update, :edit, :destroy]
+  before_action :require_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   def new
     @user = User.new
   end
@@ -41,6 +41,13 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page], per_page: 5)
   end
 
+  def destroy
+    @user.destroy
+    session[:user_id] = nil
+    flash[:notice] = 'Your account and all articles associated with it were deleted'
+    redirect_to articles_path
+  end
+
   private
 
   def user_params
@@ -51,7 +58,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])  
   end
   def require_same_user
-    redirect_to root_path unless @user == current_user 
-    flash[:alert] = 'You could only edit your own account'
+    unless @user == current_user
+      redirect_to root_path  
+      flash[:alert] = 'You could only edit your own account'
+    end
   end
 end
