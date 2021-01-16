@@ -14,7 +14,7 @@
                         <div class="mb-3 mt-2"><%= gravatar(user,size: 200) %></div>
                         <p> <%=pluralize(user.articles.count, 'Article')%> </p>
                         <%=link_to'View profile', user_path(user), class:"btn btn-outline-success"%>
-                        <%=link_to'Edit profile', edit_user_path(user), class:"btn btn-outline-primary"%>
+                        <%=link_to'Edit profile', edit_user_path(user), class:"btn btn-outline-primary" if logged_in? && user == current_user%>
                     </div>
                     <div class="card-footer text-muted">
                        <small>joined <%= time_ago_in_words(user.created_at)%> ago</small> 
