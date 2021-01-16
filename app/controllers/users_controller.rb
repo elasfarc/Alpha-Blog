@@ -42,10 +42,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    session[:user_id] = nil
-    flash[:notice] = 'Your account and all articles associated with it were deleted'
-    redirect_to articles_path
+    if confirmed_password?
+      @user.destroy
+      session[:user_id] = nil
+      flash[:notice] = 'Your account and all articles associated with it were deleted'
+      redirect_to articles_path
+    else
+      flash.now[:alert] = 'Inncorrect password'
+      render 'pages/confirm_password'
+    end
   end
 
   private
@@ -58,9 +63,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])  
   end
   def require_same_user
+    
     unless @user == current_user
       redirect_to root_path  
       flash[:alert] = 'You could only edit your own account'
     end
+  end
+  def confirmed_password?
+    current_user.authenticate(params[:user][:password])
   end
 end

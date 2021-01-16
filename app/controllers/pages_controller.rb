@@ -6,4 +6,9 @@ class PagesController < ApplicationController
   end
 
   def about; end
+
+  def confirm_password
+    
+  end
+
 end
