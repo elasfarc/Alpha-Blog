@@ -3,7 +3,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :edit, :destroy]
   before_action :require_user, only: [:edit, :update, :destroy]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update]
+  before_action :delete_privilege, only: [:destroy]
   def new
     @user = User.new
   end
@@ -42,15 +43,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if confirmed_password?
       @user.destroy
-      session[:user_id] = nil
+      #session[:user_id] = nil unless current_user.admin?
+      if current_user.admin?
+        session[:user_id] = nil if current_user == @user 
+      else
+        session[:user_id] = nil
+      end
       flash[:notice] = 'Your account and all articles associated with it were deleted'
       redirect_to articles_path
-    else
-      flash.now[:alert] = 'Inncorrect password'
-      render 'pages/confirm_password'
-    end
   end
 
   private
@@ -70,6 +71,25 @@ class UsersController < ApplicationController
     end
   end
   def confirmed_password?
+
     current_user.authenticate(params[:user][:password])
   end
+
+  def delete_privilege
+    if current_user.admin? 
+      if current_user == @user 
+        unless confirmed_password?
+          flash.now[:alert] = 'Inncorrect password'
+          render 'pages/confirm_password'
+        end
+      end 
+    else
+      require_same_user
+      unless confirmed_password?
+        flash.now[:alert] = 'Inncorrect password'
+        render 'pages/confirm_password'
+      end
+    end
+  end
+
 end

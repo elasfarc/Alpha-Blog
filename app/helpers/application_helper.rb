@@ -14,4 +14,8 @@ module ApplicationHelper
     image_tag(image_src, class: 'rounded shadow d-block mx-auto')
   end
 
+  def user_is_admin?(user)
+    user.admin?
+  end
+
 end
