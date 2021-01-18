@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :edit, :destroy]
-  before_action :require_user, only: [:edit, :update, :destroy]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :set_user, only: %i[show update edit destroy]
+  before_action :require_user, only: %i[edit update destroy]
+  before_action :require_same_user, only: %i[edit update]
   before_action :delete_privilege, only: [:destroy]
   def new
     @user = User.new
@@ -20,12 +20,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-   
-  end
+  def edit; end
 
   def update
-    
     if @user.update(user_params)
       flash[:notice] = " Your user's info has been updated"
       redirect_to user_path(@user)
@@ -43,15 +40,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-      @user.destroy
-      #session[:user_id] = nil unless current_user.admin?
-      if current_user.admin?
-        session[:user_id] = nil if current_user == @user 
-      else
-        session[:user_id] = nil
-      end
-      flash[:notice] = 'Your account and all articles associated with it were deleted'
-      redirect_to articles_path
+    @user.destroy
+    # session[:user_id] = nil unless current_user.admin?
+    if current_user.admin?
+      session[:user_id] = nil if current_user == @user
+    else
+      session[:user_id] = nil
+    end
+    flash[:notice] = 'Your account and all articles associated with it were deleted'
+    redirect_to articles_path
   end
 
   private
@@ -61,28 +58,26 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])  
+    @user = User.find(params[:id])
   end
+
   def require_same_user
-    
     unless @user == current_user
-      redirect_to root_path  
+      redirect_to root_path
       flash[:alert] = 'You could only edit your own account'
     end
   end
-  def confirmed_password?
 
+  def confirmed_password?
     current_user.authenticate(params[:user][:password])
   end
 
   def delete_privilege
-    if current_user.admin? 
-      if current_user == @user 
-        unless confirmed_password?
-          flash.now[:alert] = 'Inncorrect password'
-          render 'pages/confirm_password'
-        end
-      end 
+    if current_user.admin?
+      if current_user == @user && !confirmed_password?
+        flash.now[:alert] = 'Inncorrect password'
+        render 'pages/confirm_password'
+      end
     else
       require_same_user
       unless confirmed_password?
@@ -91,5 +86,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
 end

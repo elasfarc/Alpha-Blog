@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-
   def gravatar(user, options = { size: 80 })
     # get the email from URL-parameters or what have you and make lowercase
     email_address = user.email.downcase
@@ -17,5 +16,4 @@ module ApplicationHelper
   def user_is_admin?(user)
     user.admin?
   end
-
 end
