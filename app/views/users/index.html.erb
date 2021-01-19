@@ -1,34 +1,33 @@
 <h1 class="text-center mb-4 mt-4">All BLOGGERS</h1>
 <div class="digg_pagination row justify-content-center mt-3">
-    <%= will_paginate @users, :container => false %>
+  <%= will_paginate @users, :container => false %>
 </div>
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-8">
-            <% @users.each do |user|%>
-                <div class="card text-center mb-5 mt-5">
-                    <div class="card-header">
-                         <%=link_to user.name, user_path(user)%>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3 mt-2"><%= gravatar(user,size: 200) %></div>
-                        <p> <%=pluralize(user.articles.count, 'Article')%> </p>
-                        <%=link_to'View profile', user_path(user), class:"btn btn-outline-success"%>
-                        <%=link_to'Edit profile', edit_user_path(user), class:"btn btn-outline-primary" if logged_in? && user == current_user%>
-                        <%if user_is_admin?(user)%>
-                            <%=link_to'Delete profile', confirm_user_deletion_path, class:"btn btn-outline-danger"%>
-                        <%else%>
-                            <%=link_to'Delete profile', user_path(user),method: :delete, class:"btn btn-outline-danger" if logged_in? && current_user.admin?%>
-                        <%end%>
-                    </div>
-                    <div class="card-footer text-muted">
-                       <small>joined <%= time_ago_in_words(user.created_at)%> ago</small> 
-                    </div>
-                </div>
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <% @users.each do |user|%>
+        <div class="card text-center mb-5 mt-5">
+          <div class="card-header">
+            <%=link_to user.name, user_path(user)%>
+          </div>
+          <div class="card-body">
+            <div class="mb-3 mt-2"><%= gravatar(user,size: 200) %></div>
+            <p> <%=pluralize(user.articles.count, 'Article')%> </p>
+            <%=link_to'View profile', user_path(user), class:"btn btn-outline-success"%>
+            <%=link_to'Edit profile', edit_user_path(user), class:"btn btn-outline-primary" if logged_in? && user == current_user%>
+            <%if logged_in? %>
+              <%=link_to'Delete profile', confirm_user_deletion_path, class:"btn btn-outline-danger" if user_is_admin?(user)%>
+              <%=link_to'Delete profile', user_path(user),method: :delete, class:"btn btn-outline-danger" if current_user.admin?%>
             <%end%>
+          </div>
+          <div class="card-footer text-muted">
+            <small>joined <%= time_ago_in_words(user.created_at)%> ago</small>
+          </div>
         </div>
-    </div> 
+      <%end%>
+    </div>
+  </div>
 </div>
 <div class="digg_pagination row justify-content-center mb-3">
-    <%= will_paginate @users, :container => false %>
+  <%= will_paginate @users, :container => false %>
 </div>
