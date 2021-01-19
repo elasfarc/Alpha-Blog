@@ -1,0 +1,26 @@
+<h1 class='text-center mt-3'>Showing all Articles</h1>
+<div class="digg_pagination row justify-content-center mt-3">
+    <%= will_paginate @categories, :container => false %>
+</div>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <% @categories.each do |category|%>
+                <div class="card text-center mb-5 mt-5">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title"> <%=link_to category.name, category_path(category), class:'text-success'%> </h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                       <small>created <%= time_ago_in_words(category.created_at)%> ago, edited <%=time_ago_in_words(category.updated_at)%> ago</small> 
+                    </div>
+                </div>
+            <%end%>
+        </div>
+    </div> 
+</div>
+
+<div class="digg_pagination row justify-content-center mb-2">
+    <%= will_paginate @articles, :container => false %>
+</div>
