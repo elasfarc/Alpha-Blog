@@ -6,6 +6,7 @@
         <div class="card-header">
           By: <%=@article.user.name%>
            <div class="mt-1"> <%=gravatar(@article.user)%> </div>
+           <div class="mt-2"><%= render @article.categories%></div>
         </div>
         <div class="card-body">
           
