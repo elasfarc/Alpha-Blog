@@ -1,1 +1,14 @@
 <h1 class="text-center mb-4 mt-4"> <%=@category.name%> </h1>
+
+
+<div class="text-center mb-4 mt-4"><%=link_to'Edit Category', edit_category_path(@category), class:"btn btn-outline-info" if logged_in? &&current_user.admin?%></div>
+
+<div class="digg_pagination row justify-content-center mt-3">
+    <%= will_paginate @articles, :container => false %>
+</div>
+
+<%=render 'articles/article'%>
+
+<div class="digg_pagination row justify-content-center mb-3">
+    <%= will_paginate @articles, :container => false %>
+</div>
